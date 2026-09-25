@@ -1,48 +1,104 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 public class Pratica {
     public static void main(String[] args) {
 
-        Calculadora c1 = new Calculadora();
+        List<Aluno> alunos = new ArrayList();
+        Scanner sc = new Scanner(System.in);
 
-        Scanner sc = new Scanner (System.in);
 
-        System.out.println("Digite o primeiro número:");
-        double num1 = sc.nextDouble();
+       int escolha;
+        do {
+            
+            
+            System.out.println("Digite [0] para sair \nDigite [1] para cadastrar aluno \nDigite [2] para listar todos os alunos \nDigite [3] para buscar aluno por matricula \nDigite [4] para remover um aluno");
+            escolha = sc.nextInt();
+            sc.nextLine();
+            switch (escolha) {
 
-        System.out.println("Digite aqui o segundo número:");
-        double num2 = sc.nextDouble();
+                case 0: {
 
-        System.out.println("Digite [1] para somar \nDigite [2] para subtrair \nDigite [3] para multiplicação \nDigite [4] para divisão");
-        int escolha = sc.nextInt();
+                    System.out.println("Sistema foi encerrado.");
+                    break;
 
-            if (escolha == 1) {
+                }
+                case 1: {
 
-                System.out.println(c1.Soma(num1, num2));
-                
-            }
-            else if (escolha == 2) {
+                    System.out.println("Digite aqui o nome do aluno: ");
+                    String nomeAluno = sc.nextLine();
+                    System.out.println("Digite aqui a idade do aluno: ");
+                    int idadeAluno = sc.nextInt();
+                    alunos.add(new Aluno(nomeAluno,idadeAluno));
 
-                System.out.println(c1.Subtração(num1, num2));
+                    break;
 
-            }
-            else if (escolha ==3) {
+                }
+                case 2: {
 
-                System.out.println(c1.Multiplicacao(num1, num2));
+                    for (Aluno mostrarAlunos:alunos) {
 
-            }
-            else if(escolha == 4) {
+                        System.out.println(mostrarAlunos);
 
-                System.out.println(c1.Divisao(num1, num2));
-                System.out.println(c1.resto(num1, num2));
-            }
-            else {
+                    }
+                    break;
 
-                System.err.println("ERRO");
+                }
+                case 3: {
 
-            }
+                    System.out.println("Digite aqui a matricula do aluno para busca:");
+                    int matriculaBusca = sc.nextInt();
+                    
+                    for (Aluno buscaMatricula:alunos) {
 
-        sc.close();
+                        if (buscaMatricula.getMatricula() == matriculaBusca) {
+
+                            System.out.println(buscaMatricula);
+                            break;
+                            
+
+                        }                    
+                    }
+                    break;
+                }
+                case 4: {
+
+                    System.out.println("Digite a matricula do aluno");
+                    int matriculaBusca = sc.nextInt();
+
+                    for(int i = 0; i < alunos.size(); i++) {
+
+                        if (alunos.get(i).getMatricula() == matriculaBusca) {
+
+                            System.out.println("REMOVIDO");
+                            System.out.println(alunos.get(i).toString());
+                            alunos.remove(i);
+                            break;
+
+                        }
+
+                    }
+                    break;
+
+
+                }
+                default: {
+
+                    System.out.println("Erro");
+                    break;
+
+                }
+
+
+            } 
+            
+
+        } while (escolha != 0);
+
+        
+
+
     }
-
-
+    
 }
